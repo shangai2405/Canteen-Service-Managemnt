@@ -1,0 +1,51 @@
+#cartModal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,0.35);
+    backdrop-filter: blur(4px);
+
+    z-index: 9999;
+}
+
+/* Center Card */
+.cart-box {
+    width: 480px;
+    max-width: 95%;
+
+    background: white;
+    border-radius: 14px;
+    padding: 24px;
+
+    box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+
+    animation: cartPop 0.25s ease;
+}
+
+@keyframes cartPop {
+    from {
+        transform: scale(0.9) translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+.cart-pop {
+    animation: cartPop 0.3s ease;
+}
+
+@keyframes cartPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+}
