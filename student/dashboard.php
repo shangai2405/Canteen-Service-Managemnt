@@ -29,10 +29,12 @@ $items = $conn->query("SELECT * FROM menu_items WHERE is_available = 1");
     <script src="/Canteen-Services/assets/js/cart.js" defer></script>
     <script src="/Canteen-Services/assets/js/cart_checkout.js" defer></script>
 
+    <!-- ⭐ FLOATING CART SCRIPT -->
+    <script src="/Canteen-Services/assets/js/floating_cart.js" defer></script>
+
 </head>
+
 <body>
-
-
 
 <!-- ================= WHAT'S ON YOUR MIND ================= -->
 <section class="category-section">
@@ -64,10 +66,8 @@ $items = $conn->query("SELECT * FROM menu_items WHERE is_available = 1");
         <h4><?= $f['item_name'] ?></h4>
         <p>₹<?= $f['price'] ?></p>
 
-        <!-- ADD BUTTON -->
         <button class="add-btn">ADD</button>
 
-        <!-- QTY CONTROLS -->
         <div class="qty-controls hidden">
             <button class="minus">-</button>
             <span class="qty">1</span>
@@ -76,8 +76,7 @@ $items = $conn->query("SELECT * FROM menu_items WHERE is_available = 1");
 
     </div>
 
-<?php endwhile; ?>
-
+    <?php endwhile; ?>
     </div>
 </section>
 
@@ -106,9 +105,21 @@ $items = $conn->query("SELECT * FROM menu_items WHERE is_available = 1");
         <button onclick="closeModal()">Cancel</button>
     </div>
 </div>
+
 <?php include("../components/cart_modal.php"); ?>
 
 <script src="/Canteen-Services/assets/js/cart_checkout.js"></script>
+
+<!-- ⭐ FLOATING CART BAR -->
+<div id="floatingCartBar" class="floating-cart hidden">
+    <div>
+        <b><span id="floatQty">0</span> items</b>
+    </div>
+    <div>
+        ₹ <span id="floatTotal">0</span>
+    </div>
+    <button onclick="openCart()">View Cart</button>
+</div>
 
 </body>
 </html>

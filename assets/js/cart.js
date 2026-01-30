@@ -49,6 +49,27 @@ function setupFoodCards() {
             updateCartUI();
         });
 
+                // QUICK ADD (Double Click Food Card)
+        card.addEventListener("dblclick", () => {
+
+            const id = card.dataset.id;
+            const price = parseInt(card.dataset.price);
+
+            if (!window.cart[id]) {
+                window.cart[id] = { qty: 1, price };
+            } else {
+                window.cart[id].qty++;
+            }
+
+            // Force UI visible
+            addBtn.classList.add("hidden");
+            qtyBox.classList.remove("hidden");
+            qtyText.innerText = window.cart[id].qty;
+
+            updateCartUI();
+        });
+
+
         plus.addEventListener("click", () => {
             const id = card.dataset.id;
             window.cart[id].qty++;
@@ -193,7 +214,12 @@ function renderCartModal() {
 function updateCartUI() {
     updateCartCount();
     renderCartModal();
+
+    if(window.updateFloatingCart){
+        window.updateFloatingCart();
+    }
 }
+
 
 function updateCartCount() {
 
