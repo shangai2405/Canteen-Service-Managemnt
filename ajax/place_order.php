@@ -64,13 +64,22 @@ $order_id = $conn->insert_id;
 
 /* ---------------- INSERT ORDER ITEMS ---------------- */
 foreach ($items as $item_id => $v) {
+
     $quantity = isset($qty[$item_id]) ? (int)$qty[$item_id] : 1;
 
     $conn->query("
         INSERT INTO order_items (order_id, item_id, quantity)
         VALUES ($order_id, $item_id, $quantity)
     ");
+
+    // ⭐ UPDATE POPULAR COUNT
+    $conn->query("
+        UPDATE menu_items
+        SET order_count = order_count + $quantity
+        WHERE item_id = $item_id
+    ");
 }
+
 
 /* ---------------- SUCCESS ---------------- */
 echo "ORDER_SUCCESS";
