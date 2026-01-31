@@ -194,11 +194,16 @@ function renderCartModal() {
 
         total += item.qty * item.price;
 
+        const name = document.querySelector(
+            `.food-card[data-id="${id}"] h4`
+        )?.innerText || "Item";
+        
         list.innerHTML += `
             <div class="cart-row">
-                Item ${id} × ${item.qty} — ₹${item.qty * item.price}
+                ${name} × ${item.qty} — ₹${item.qty * item.price}
             </div>
         `;
+        
     });
 
     if (total === 0) {
@@ -214,6 +219,7 @@ function renderCartModal() {
 function updateCartUI() {
     updateCartCount();
     renderCartModal();
+    showSmartSuggestions();
 
     if(window.updateFloatingCart){
         window.updateFloatingCart();
@@ -258,4 +264,64 @@ document.addEventListener("click", function(e){
     if(!modal.classList.contains("hidden") && e.target === modal){
         closeCart();
     }
+});
+
+function showSmartSuggestions() {
+
+    const suggestionBox = document.getElementById("smartSuggestions");
+    if (!suggestionBox) return;
+
+    let suggestions = [];
+
+    Object.keys(window.cart).forEach(id => {
+        const itemName = document.querySelector(
+            `.food-card[data-id="${id}"] h4`
+        )?.innerText.toLowerCase() || "";
+
+        if (itemName.includes("biriyani")) {
+            suggestions.push("Cold Drink", "Chicken 65");
+        }
+        if (itemName.includes("meals")) {
+            suggestions.push("Curd", "Buttermilk");
+        }
+        if (itemName.includes("snack") || itemName.includes("puff")) {
+            suggestions.push("Tea", "Coffee");
+        }
+    });
+
+    suggestionBox.innerHTML = "";
+    [...new Set(suggestions)].forEach(s => {
+        suggestionBox.innerHTML += `
+        <div class="suggestion" data-name="${s}">
+            ➕ Add ${s}
+        </div>
+    `;
+    });
+}
+
+document.addEventListener("click", e => {
+
+    if (!e.target.classList.contains("suggestion")) return;
+
+    const name = e.target.dataset.name.toLowerCase();
+
+    // Find matching food card
+    const card = [...document.querySelectorAll(".food-card")]
+        .find(c => c.querySelector("h4").innerText.toLowerCase().includes(name));
+
+    if (!card) {
+        alert("Item not available in this canteen");
+        return;
+    }
+
+    const id = card.dataset.id;
+    const price = parseInt(card.dataset.price);
+
+    if (!window.cart[id]) {
+        window.cart[id] = { qty: 1, price };
+    } else {
+        window.cart[id].qty++;
+    }
+
+    updateCartUI();
 });

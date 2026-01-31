@@ -75,3 +75,16 @@
     border-radius:8px;
     cursor:pointer;
 }
+
+.suggestions-box{
+    margin-top:12px;
+    padding-top:10px;
+    border-top:1px solid #ddd;
+}
+.suggestion{
+    padding:6px;
+    background:#f8f8f8;
+    margin-bottom:6px;
+    border-radius:6px;
+    cursor:pointer;
+}

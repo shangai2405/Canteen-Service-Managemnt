@@ -11,6 +11,8 @@
             No items added yet
         </div>
 
+        <div id="smartSuggestions" class="suggestions-box"></div>
+
         <hr>
 
         <h5>Total: ₹<span id="cartTotal">0</span></h5>
@@ -28,3 +30,5 @@
     </div>
 
 </div>
+
+

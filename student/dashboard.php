@@ -8,7 +8,15 @@ include("../components/navbar.php");
 
 checkRole('student');
 
-$items = $conn->query("SELECT * FROM menu_items WHERE is_available = 1");
+$canteen = $_COOKIE['canteen'] ?? 'AB1';
+
+$stmt = $conn->prepare(
+    "SELECT * FROM menu_items WHERE is_available = 1 AND canteen = ?"
+);
+$stmt->bind_param("s", $canteen);
+$stmt->execute();
+$items = $stmt->get_result();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
