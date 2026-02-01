@@ -1,35 +1,19 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.querySelectorAll(".tab").forEach(tab => {
+    tab.addEventListener("click", () => {
 
-    const tabs = document.querySelectorAll(".tab");
-    const cards = document.querySelectorAll(".food-card");
+        document.querySelectorAll(".tab")
+            .forEach(t => t.classList.remove("active"));
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
+        tab.classList.add("active");
 
-            // active tab UI
-            tabs.forEach(t => t.classList.remove("active"));
-            tab.classList.add("active");
+        const id = tab.dataset.filter;
+        const target = document.getElementById(id);
 
-            const filter = tab.dataset.filter;
-
-            cards.forEach(card => {
-
-                // MOST ORDERED
-                if (filter === "popular") {
-                    card.style.display =
-                        card.dataset.popular === "1"
-                            ? "block"
-                            : "none";
-                }
-                // CATEGORY FILTER
-                else {
-                    card.style.display =
-                        card.dataset.category === filter
-                            ? "block"
-                            : "none";
-                }
+        if (target) {
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
             });
-        });
+        }
     });
-
 });
