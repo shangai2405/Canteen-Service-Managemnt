@@ -9,6 +9,13 @@
         🍴 CanteenX
     </a>
 
+    <select id="canteenSelect" class="form-select w-auto ms-3">
+        <option value="AB1">AB1</option>
+        <option value="IT">IT</option>
+        <option value="MBA">MBA</option>
+        <option value="CAFETERIA">CAFETERIA</option>
+    </select>
+
     
     <input class="form-control" id="foodSearch" placeholder="Search food...">
     <div id="searchResults" class="list-group position-absolute w-100"></div>

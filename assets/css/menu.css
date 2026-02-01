@@ -92,3 +92,31 @@
     color: white;
     transform: scale(1.05);
 }
+
+.food-tabs {
+    display: flex;
+    gap: 10px;
+    padding: 10px 30px;
+    overflow-x: auto;
+}
+
+.food-tabs .tab {
+    padding: 8px 14px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.food-tabs .tab.active {
+    background: #fc8019;
+    color: white;
+    border-color: #fc8019;
+}
+
+.category.active {
+    background: #fc8019;
+    color: white;
+    font-weight: 600;
+}
