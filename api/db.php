@@ -6,8 +6,40 @@
  * 
  * CREATE DATABASE IF NOT EXISTS smart_canteen;
  * USE smart_canteen;
- * -- (Follow the instructions in the app UI if this fails)
+ * /*
+USE smart_canteen;
+
+
+Create table using these codes in phpmyadmin server: 
+
+CREATE TABLE menu (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    category VARCHAR(100),
+    price DECIMAL(10,2),
+    popularity INT DEFAULT 0,
+    stock INT DEFAULT 0
+);
+
+CREATE TABLE orders (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    userId VARCHAR(50),
+    total DECIMAL(10,2),
+    slot VARCHAR(50),
+    status VARCHAR(50),
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_items (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    menu_item_id INT,
+    quantity INT,
+    FOREIGN KEY (order_id) REFERENCES orders(id)
+);
+
  */
+
 
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
