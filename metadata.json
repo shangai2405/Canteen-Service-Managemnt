@@ -1,0 +1,7 @@
+{
+  "description": "Smart Canteen Pre-Order & Food Readiness System with AI assistant and live tracking.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "name": "SmartCanteen"
+}
